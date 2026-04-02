@@ -1,0 +1,8 @@
+GET http://localhost:5014/alimentos
+
+###
+
+POST  http://localhost:5014/alimentos?massa=Macarrão
+
+
+
