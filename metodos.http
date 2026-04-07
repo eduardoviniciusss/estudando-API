@@ -1,8 +1,33 @@
-GET http://localhost:5014/alimentos
+GET  http://localhost:5014/bebidas
 
 ###
 
-POST  http://localhost:5014/alimentos?massa=Macarrão
+GET http://localhost:5014/bebidas/1
 
+###
 
+POST  http://localhost:5014/bebidas
+Content-Type: application/json
+
+{
+    "Nome" : "Cerveja",
+    "Tipo" : "Bebida aucoólica",
+    "Preço": 10.0
+}
+
+###
+
+PUT  http://localhost:5014/bebidas/11
+Content-Type: application/json
+
+{
+    "Nome" : "Cerveja",
+    "Tipo" : "Bebida aucoólica",
+    "Preço": 11.50
+}
+
+###
+//DELETE
+
+DELETE http://localhost:5014/bebidas/9
 

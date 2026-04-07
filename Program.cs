@@ -1,48 +1,68 @@
+using CardapioAPI;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>(options => options.
+UseSqlite("Data Source=bebidas.db"));
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+//GET por all
 var app = builder.Build();
 
-//CRUD
-//CREAT-POST
-//READ-GET
-//UPDATE-PUT
-//PATCH-MUDAR SO UMA COISA
-//DELETE-DELETE
-
-// GET - Visualizando
-app.MapGet("/alimentos", () =>
+if(app.Environment.IsDevelopment())
 {
-   List<string> massas = new List<string>
-   {
-    "Pizza",
-    "Pastelão",
-    "Coxinha"
-    };
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-    return massas;
+app.MapGet("/bebidas" , async (AppDbContext db) =>
+{
+    return await db.Bebidas.ToListAsync(); 
 });
 
-//POST -Criando
-app.MapPost("/alimentos" , (string massa) =>
+//GET com id
+app.MapGet("/bebidas/{id}" , async (AppDbContext db,int id) => 
 {
-    return Results.Ok($"Alimento {massa} adicionado com sucesso!");
+    var bebidas = await db.Bebidas.FindAsync(id);
+    return bebidas;
 });
 
-//PUT - Atualizando
-app.MapPut("/alimentos/{id}" , (int id, string novaMassa) =>
+//POST
+app.MapPost("/bebidas", async (AppDbContext db,Bebida novaBebida) =>
 {
-    return Results.Ok($"Massa {id} sendo atualizada para {novaMassa}");
+    db.Bebidas.Add(novaBebida);
+    await db.SaveChangesAsync();
+    return Results.Created($"/A bebida {novaBebida} foi adcionada com sucesso!",novaBebida);
 });
 
-//PATCH - Atualizar pacialmente
-app.MapPatch("/alimentos/{id}" ,(int id,string campo, string valor) =>
+//PUT
+app.MapPut("/bebidas/{id}", async (int id,AppDbContext db,Bebida novaBebida) =>
 {
-    return Results.Ok($"A massa {id} teve o {campo} atualizando pra {valor}");
+    var bebidas = await db.Bebidas.FindAsync(id);
+    if (bebidas is null) return Results.NotFound();
+
+    bebidas.Nome = novaBebida.Nome;
+    bebidas.Tipo = novaBebida.Tipo;
+    bebidas.Preço = novaBebida.Preço;
+
+    await db.SaveChangesAsync();
+    return Results.Ok(bebidas);
+
 });
 
-//DELET-Remover
-app.MapDelete("/alimentos/{id}" , (int id) =>
+//DELETE
+app.MapDelete("/bebidas/{id}", async (int id,AppDbContext db ) =>
 {
-    return Results.Ok($"Massa {id} removida com sucesso!");
+    var bebida = await db.Bebidas.FindAsync(id);
+    if (bebida is null) return Results.NotFound("Bebida não existente!");
+
+    db.Bebidas.Remove(bebida);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
 });
 
 app.Run();

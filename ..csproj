@@ -11,4 +11,26 @@
     <Content Include="Program.cs" />
     <Content Include="metodos.http" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <Content Include="appDbContext.cs" />
+    <Content Include="bebidas.cs" />
+    <Content Include="teste" />
+    <Content Include="Bebida.cs" />
+    <Content Include="Migrations\20260406222953_InitialCreate.cs" />
+    <Content Include="Migrations\20260406222953_InitialCreate.Designer.cs" />
+    <Content Include="Migrations\AppDbContextModelSnapshot.cs" />
+    <Content Include="dados.sql" />
+    <Content Include="GetPostPutDelete.cs" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
+  </ItemGroup>
 </Project>
