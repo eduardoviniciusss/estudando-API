@@ -4,35 +4,42 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace _.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260406222953_InitialCreate")]
+    [Migration("20260408140508_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.5");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "10.0.5")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("CardapioAPI.Bebida", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nome")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<float>("Preço")
-                        .HasColumnType("REAL");
+                        .HasColumnType("real");
 
                     b.Property<string>("Tipo")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

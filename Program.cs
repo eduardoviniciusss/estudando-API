@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options => options.
-UseSqlite("Data Source=bebidas.db"));
+UseNpgsql("Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=1234"));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
