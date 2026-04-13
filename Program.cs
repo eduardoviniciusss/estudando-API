@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options => options.
-UseNpgsql("Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=1234"));
+UseNpgsql("Host=localhost;Port=5432;Database=cardapioapi;Username=postgres;Password=suaSenha"));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
