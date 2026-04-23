@@ -1,0 +1,8 @@
+$kind: http-request
+name: " http://localhost:5014/bebidas/3"
+url: " http://localhost:5014/bebidas/3"
+method: GET
+body:
+  type: json
+  content: ""
+order: 1830339644018322

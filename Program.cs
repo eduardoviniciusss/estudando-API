@@ -2,10 +2,12 @@ using CardapioAPI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options => options.
-UseNpgsql("Host=localhost;Port=5432;Database=cardapioapi;Username=postgres;Password=suaSenha"));
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql("Host=localhost;Port=5432;Database=cardapio_digital;Username=cardapio_app;Password=cardapio1234")
+           .UseSnakeCaseNamingConvention());
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -32,22 +34,28 @@ app.MapGet("/bebidas/{id}" , async (AppDbContext db,int id) =>
 });
 
 //POST
-app.MapPost("/bebidas", async (AppDbContext db,Bebida novaBebida) =>
+app.MapPost("/bebidas", async (AppDbContext db,BebidaDto dto) =>
 {
+    var novaBebida = new Bebida
+    {
+        Nome = dto.Nome,
+        Tipo = dto.Tipo,
+        Preco = dto.Preco
+    };
     db.Bebidas.Add(novaBebida);
     await db.SaveChangesAsync();
     return Results.Created($"/A bebida {novaBebida} foi adcionada com sucesso!",novaBebida);
 });
 
 //PUT
-app.MapPut("/bebidas/{id}", async (int id,AppDbContext db,Bebida novaBebida) =>
+app.MapPut("/bebidas/{id}", async (int id,AppDbContext db,BebidaDto dto) =>
 {
     var bebidas = await db.Bebidas.FindAsync(id);
     if (bebidas is null) return Results.NotFound();
 
-    bebidas.Nome = novaBebida.Nome;
-    bebidas.Tipo = novaBebida.Tipo;
-    bebidas.Preço = novaBebida.Preço;
+    bebidas.Nome = dto.Nome;
+    bebidas.Tipo = dto.Tipo;
+    bebidas.Preco = dto.Preco;
 
     await db.SaveChangesAsync();
     return Results.Ok(bebidas);

@@ -1,0 +1,16 @@
+$kind: http-request
+name: " http://localhost:5014/bebidas"
+url: " http://localhost:5014/bebidas"
+method: GET
+body:
+  type: json
+  content: "{\r
+
+    \    \"nome\": \"Guaraná\",\r
+
+    \    \"tipo\": \"Refrigerante\",\r
+
+    \    \"preco\": 6.00\r
+
+    }\r\n"
+order: 1776809372322

@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace _.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260408140508_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260422154639_AjustePreco")]
+    partial class AjustePreco
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,22 +28,27 @@ namespace _.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nome")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("nome");
 
-                    b.Property<float>("Preço")
-                        .HasColumnType("real");
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(10,2)")
+                        .HasColumnName("preco");
 
                     b.Property<string>("Tipo")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("tipo");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_bebidas");
 
-                    b.ToTable("Bebidas");
+                    b.ToTable("bebidas", (string)null);
                 });
 #pragma warning restore 612, 618
         }

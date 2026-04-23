@@ -12,6 +12,7 @@
     <Content Include="metodos.http" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EFCore.NamingConventions" Version="10.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,7 +22,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <Content Include="appDbContext.cs" />
     <Content Include="bebidas.cs" />
     <Content Include="teste" />
     <Content Include="Bebida.cs" />
@@ -29,7 +29,8 @@
     <Content Include="GetPostPutDelete.cs" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
-    <Content Include="AppDbContext.cs" />
     <Content Include=".gitignore" />
+    <Content Include="BebidaDto.cs" />
+    <Content Include="AppDbContext.cs" />
   </ItemGroup>
 </Project>

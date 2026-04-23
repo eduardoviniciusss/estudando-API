@@ -12,18 +12,18 @@ namespace _.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Bebidas",
+                name: "bebidas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nome = table.Column<string>(type: "text", nullable: true),
-                    Tipo = table.Column<string>(type: "text", nullable: true),
-                    Preço = table.Column<float>(type: "real", nullable: false)
+                    nome = table.Column<string>(type: "text", nullable: true),
+                    tipo = table.Column<string>(type: "text", nullable: true),
+                    preco = table.Column<decimal>(type: "numeric", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bebidas", x => x.Id);
+                    table.PrimaryKey("pk_bebidas", x => x.id);
                 });
         }
 
@@ -31,7 +31,7 @@ namespace _.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Bebidas");
+                name: "bebidas");
         }
     }
 }
