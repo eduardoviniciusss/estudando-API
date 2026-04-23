@@ -12,6 +12,6 @@ namespace CardapioAPI
         public string? Nome { get; set; }
         public string? Tipo { get; set; }
         [Column(TypeName = "decimal(10,2)")]
-        public decimal Preco { get; set; }
+        public decimal? Preco { get; set; }
     }
 }

@@ -1,0 +1,16 @@
+$kind: http-request
+name: http://localhost:5014/bebidas
+url: http://localhost:5014/bebidas
+method: GET
+body:
+  type: json
+  content: "{\r
+
+    \        \"nome\": \"Nescau\",\r
+
+    \        \"tipo\": \"Achocolatado\",\r
+
+    \        \"preco\": 8.50000\r
+
+    \    }"
+order: 4063654161194347

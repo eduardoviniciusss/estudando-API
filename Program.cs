@@ -62,6 +62,26 @@ app.MapPut("/bebidas/{id}", async (int id,AppDbContext db,BebidaDto dto) =>
 
 });
 
+app.MapPatch("/bebidas/{id}", async (int id, AppDbContext db, BebidaDto dto) =>
+{
+    var bebida = await db.Bebidas.FindAsync(id);
+    if (bebida is null)
+        return Results.NotFound();
+
+    if (dto.Nome is not null)
+        bebida.Nome = dto.Nome;
+
+    if (dto.Tipo is not null)
+        bebida.Tipo = dto.Tipo;
+
+    if (dto.Preco is not null)
+        bebida.Preco = dto.Preco.Value;
+
+    await db.SaveChangesAsync();
+
+    return Results.Ok(bebida);
+});
+
 //DELETE
 app.MapDelete("/bebidas/{id}", async (int id,AppDbContext db ) =>
 {

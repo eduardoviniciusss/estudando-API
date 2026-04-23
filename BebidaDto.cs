@@ -11,6 +11,6 @@ namespace CardapioAPI
     {
         public string? Nome { get; set; }
         public string? Tipo { get; set; }
-        public decimal Preco { get; set; }
+        public decimal? Preco { get; set; }
     }
 }
